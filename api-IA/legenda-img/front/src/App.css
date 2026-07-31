@@ -185,7 +185,7 @@
   flex-direction: column;
 }
 
-.caption-image{
+.captioned-image{
   display: flex;
   flex-direction: column;
   align-items: center;

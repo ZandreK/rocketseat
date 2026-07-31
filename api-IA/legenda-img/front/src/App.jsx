@@ -2,18 +2,23 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [imgSrc, setImgSrc] = useState(null);
+  const [caption, setCaption] = useState("<Caption>");
+
+  function generateCaption() {
+    setCaption("Novo caption!");
+  }
 
   return (
     <>
       <h1>Caption Generator</h1>
       <div className="url-form">
-        <input></input>
-        <button>Generate</button>
+        <input onChange={(e) => setImgSrc(e.target.value)}></input>
+        <button onClick={generateCaption}>Generate</button>
       </div>
-      <div className="caption-image">
-        <img height = {200} width = {200} style = {{ marginBottom: '10px' }}></img>
-        <span>Caption</span>
+      <div className="captioned-image">
+        <img src={imgSrc} height = {200} style = {{ marginBottom: '10px' }}></img>
+        <span>{caption}</span>
       </div>
     </>
   )
