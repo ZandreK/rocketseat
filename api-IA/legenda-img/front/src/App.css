@@ -111,9 +111,6 @@
   gap: 8px;
   margin: 32px 0 0;
 
-  .logo {
-    height: 18px;
-  }
 
   a {
     color: var(--text-h);
@@ -181,4 +178,16 @@
     right: 0;
     border-right-color: var(--border);
   }
+}
+
+.url-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.caption-image{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
 }

@@ -87,4 +87,6 @@ npm create vite@latest front -- --template react
   npm install
   npm run dev
 
-usuario@usuario-Inspiron-7577:~/trabalho/rocketseat/api-IA/legenda-img$ 
+usuario@usuario-Inspiron-7577:~/trabalho/rocketseat/api-IA/legenda-img$
+
+https://chatgpt.com/share/6a6b7966-0b8c-83e9-88cf-2706e6bed045
