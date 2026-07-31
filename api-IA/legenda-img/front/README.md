@@ -22,3 +22,10 @@ Por estar no front - isolamento não vai ser tão forte.
 Com API rest, seria mais isolado (futuro)
 
 comunicação vai ser por uma chamada de função que a app vai fazer para o modelo
+
+Com a interface API feita que será chamada quando o botão for precionada de fato. Inicia-se a implementação da lógica do modelo
+
+A classe se comporta como singleton, significa que a cada vez que ela for chamada, ela vai retornar na mesma instância, sem criar uma nova. Pois quando a pipeline é usada, precisa-se buscar o modelo no huggingface, trazer para o pc, caheado localmente, sendo um processo que pode demorar, se formos ficar recriando a cada vez a instância toda vez que formos pegar o pipeline, pode gerar um overhead pesado
+
+
+
