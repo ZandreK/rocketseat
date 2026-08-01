@@ -6,9 +6,11 @@ function App() {
   const [imgSrc, setImgSrc] = useState(null);
   const [caption, setCaption] = useState("<Caption>");
 
-  function addCaption() {
-    const caption = generateCaption(imgSrc);
-    setCaption(caption);
+  async function addCaption() {
+    setCaption("Gerando legenda...");
+    const caption = await generateCaption(imgSrc);
+    console.log(caption);
+    setCaption(caption[0]['generated_text']);
   }
 
   return (

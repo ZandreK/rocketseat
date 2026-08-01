@@ -7,13 +7,17 @@ export default class ImageCaptioner {
         console.log("Getting captioner...");
         if(this.captioner === null) {
             console.log("Creating captioner...");
-            this.captioner = await pipeline("image-to-text", "Xenova/vit-gpt2-image-captioning",{dtype: "fp32", divice: "wasm"});
+            this.captioner = await pipeline("image-to-text", 
+                "Xenova/vit-gpt2-image-captioning",
+                {dtype: "q8", device: "wasm"});
             console.log("Captioner created!");
         }    
         return this.captioner;
     }
     
-    static generateCaption(imageSrc) {
-        return "Legenda do modelo";
+    static async generateCaption(imageSrc) {
+        return this.getCaptioner().then((captioner) => 
+            captioner(imageSrc, {do_sample: true})
+        )
     }
 }
