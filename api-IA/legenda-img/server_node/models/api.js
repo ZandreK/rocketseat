@@ -1,6 +1,6 @@
 const { Translator } = require('./Translator');
 
-function translate(captionENG) {
+async function translate(captionENG) {
     return Translator.traslate(captionENG);
 }
 

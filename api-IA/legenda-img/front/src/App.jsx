@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import {generateCaption, translate} from './models/api';
 
@@ -6,6 +6,9 @@ function App() {
   const [imgSrc, setImgSrc] = useState(null);
   const [caption, setCaption] = useState("<Caption>");
   const [captionPTBR, setCaptionPTBR] = useState("<Legenda>");
+  const [audioSrc, setAudioSrc] = useState(null);
+
+  const captionAudio = useRef();
 
   async function addCaption() {
     setCaption("Gerando legenda...");
@@ -15,8 +18,22 @@ function App() {
 
     setCaptionPTBR("Traduzindo legenda...");
     const captionPTBR = await translate(caption);
-    setCaptionPTBR(captionPTBR[0]["translated_text"]); 
+    setCaptionPTBR(captionPTBR[0]["translation_text"]); 
+
+    const audioEndpoint = await convertToAudio(captionPTBR);
+    const audioSrc = "http://localhost:5000" + audioEndpoint[0]["url"];
+    setAudioSrc(audioSrc);
+
   }
+
+  useEffect(() => {
+    if(captionAudio.current && audioSrc) {
+      captionAudio.current.pause();
+      captionAudio.current.load();
+      captionAudio.current.play();
+    }
+  }, [audioSrc]);
+
 
   return (
     <>
@@ -29,6 +46,9 @@ function App() {
         <img src={imgSrc} height = {200} style = {{ marginBottom: '10px' }}></img>
         <span>{caption}</span>
         <span>{captionPTBR}</span>
+        <audio controls ref = {captionAudio}>
+          <source src={audioSrc} ></source>
+        </audio>
       </div>
     </>
   )

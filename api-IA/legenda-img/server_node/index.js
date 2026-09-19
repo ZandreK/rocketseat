@@ -14,13 +14,19 @@ app.get('/', (req, res) => {
     res.send('Olá!');
 });
 
-app.post("/translate", (req, res) => {
+app.post("/translate", async (req, res) => {
     // Lógica para traduzir a legenda da imagem
     console.log("Nova requisição!");
 
     const textENG = req.body["text"];
 
-    res.send(traslate(textENG));
+    console.log("Texto recebido: " + textENG);
+    
+    const textPTBR = await Translator.translate(textENG);
+    
+    console.log("Texto traduzido: " + textPTBR[0]["translation_text"]);
+    
+    res.send(textPTBR);
 });
 
 app.listen(port, () => {

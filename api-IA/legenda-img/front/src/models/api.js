@@ -11,10 +11,22 @@ async function translate(captionENG) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({captionENG})
+        body: JSON.stringify({"text": captionENG[0]["generated_text"]})
     }).then(
         res => res.json() 
     );
 }
 
-export {generateCaption, translate};
+async function convertToAudio(captionENG) {
+    return fetch("http://localhost:3000/text-to-audio", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({"text": captionPTBR[0]["translation_text"]})
+    }).then(
+        res => res.json() 
+    );
+}
+
+export {generateCaption, translate, convertToAudio};
